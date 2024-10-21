@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Learning How to add front end with backend",
+  "main": "server.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node server.js"
+  },
+  "keywords": [
+    "FullStack",
+    "Nodejs",
+    "Expressjs"
+  ],
+  "author": "Er Govind Thakur",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
