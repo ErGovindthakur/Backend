@@ -148,3 +148,133 @@ export default defineConfig({
 })
 ```
 
+## Day_3 (Learnt about data modeling)
+
+#### Steps to create Db Schema 
+1) npm i mongoose, (import it into your file) <br />
+
+2) create a schema (like userSchema, accountSchema etc) <br />
+
+3) create a model and export it (just remember model name should be in upperCase)
+
+### Examples
+
+#### userModel-:  ( Each user has a unique username, an email, and a password.)
+
+``` javascript
+// user.model.js
+
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    // Reference to posts created by this user
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }]
+}, { timestamps: true });
+
+export const User = mongoose.model('User', userSchema);
+
+```
+
+#### PostModel -: (Each post has a title, content, author (reference to a User), a category, and an array of comments.)
+
+``` javascript
+// post.model.js
+
+import mongoose from 'mongoose';
+
+const postSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    content: {
+        type: String,
+        required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',  // Reference to the User model
+        required: true
+    },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'  // Reference to the Category model
+    },
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'  // Reference to the Comment model
+    }]
+}, { timestamps: true });
+
+export const Post = mongoose.model('Post', postSchema);
+
+```
+
+### Comment Model -: (Each comment has text, a reference to the user who created it, and the post it belongs to)
+
+``` javascript
+// comment.model.js
+
+import mongoose from 'mongoose';
+
+const commentSchema = new mongoose.Schema({
+    text: {
+        type: String,
+        required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',  // Reference to the User model
+        required: true
+    },
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',  // Reference to the Post model
+        required: true
+    }
+}, { timestamps: true });
+
+export const Comment = mongoose.model('Comment', commentSchema);
+
+```
+
+#### Category Model-: (Each category has a name and an array of posts associated with it.)
+
+``` javascript
+import mongoose from 'mongoose';
+
+const categorySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true
+    },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'  // Reference to the Post model
+    }]
+});
+
+export const Category = mongoose.model('Category', categorySchema);
+
+```
