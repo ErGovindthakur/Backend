@@ -1,7 +1,7 @@
 // console.log('Day_1 of Backend')
 
 require('dotenv').config()
- const express = require('express') //-: common js
+const express = require('express') //-: common js
 // import express from 'express'  //-: module js
 
 const app = express()
