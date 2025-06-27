@@ -24,4 +24,4 @@ password:{
 }
 },{timestamps:true})
 
-export const usersModel = mongoose.model<IUser>("CarUser",userSchema)
+export default mongoose.model<IUser>("CarUser",userSchema)
