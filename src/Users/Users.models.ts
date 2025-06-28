@@ -1,7 +1,7 @@
 import mongoose ,{Document} from "mongoose";
 
 
-interface IUser extends Document{
+export interface IUser extends Document{
      name:string,
      email:string,
      password:string
@@ -24,4 +24,4 @@ password:{
 }
 },{timestamps:true})
 
-export const usersModel = mongoose.model<IUser>("CarUser",userSchema)
+export default mongoose.model<IUser>("CarUser",userSchema)
