@@ -1,7 +1,7 @@
 import mongoose ,{Document} from "mongoose";
 
 
-interface IUser extends Document{
+export interface IUser extends Document{
      name:string,
      email:string,
      password:string
