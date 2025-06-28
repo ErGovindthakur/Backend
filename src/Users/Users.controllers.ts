@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import UserModel from "./Users.models";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateTokens";
 
 // REGISTER
-export const register = async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const { name, email, password } = req.body;
 
@@ -40,15 +40,16 @@ export const register = async (req: Request, res: Response) => {
       message: "Registered successfully",
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err instanceof Error ? err.message : "Error while registering",
-    });
+     next(err)
+//     return res.status(500).json({
+//       success: false,
+//       message: err instanceof Error ? err.message : "Error while registering",
+//     });
   }
 };
 
 // LOGIN
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const { email, password } = req.body;
 
@@ -79,15 +80,16 @@ export const login = async (req: Request, res: Response) => {
       message: "Login successful",
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err instanceof Error ? err.message : "Error while logging in",
-    });
+     next(err)
+//     return res.status(500).json({
+//       success: false,
+//       message: err instanceof Error ? err.message : "Error while logging in",
+//     });
   }
 };
 
 // LOGOUT
-export const logout = (req: Request, res: Response) => {
+export const logout = (req: Request, res: Response,next:NextFunction) => {
   try {
     res.clearCookie("jwt", {
       httpOnly: true,
@@ -97,9 +99,10 @@ export const logout = (req: Request, res: Response) => {
 
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err instanceof Error ? err.message : "Error during logout",
-    });
+     next(err)
+//     return res.status(500).json({
+//       success: false,
+//       message: err instanceof Error ? err.message : "Error during logout",
+//     });
   }
 };

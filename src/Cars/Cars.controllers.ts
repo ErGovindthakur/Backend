@@ -57,7 +57,7 @@ export const updateCar = async (req: AuthRequest, res: Response) => {
         
           if (!car) return res.status(404).json({ message: "Car not found" });
 
-          if (car.createdBy.toString() !== req.user._id.toString())
+          if (car.createdBy.toString() !== req?.user._id.toString())
             return res.status(403).json({ message: "Unauthorized" });
         
           car.name = req.body.name || car.name;
