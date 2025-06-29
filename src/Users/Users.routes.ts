@@ -17,6 +17,7 @@ userRouter.post(
 );
 userRouter.post(
   "/logout",
+  authMiddleware as (req:Request, res:Response, next:NextFunction) => void,
   logout as (req: Request, res: Response, next: NextFunction) => void
 );
 
