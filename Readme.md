@@ -14,4 +14,10 @@ npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslin
 
 npx eslint --init
 
+
+Error Handling (using http-errors)
+npm install http-errors
+npm install -D @types/http-errors
+
+
 ```
