@@ -30,7 +30,6 @@ const carSchema = new mongoose.Schema<ICar>({
      createdBy:{
           type:mongoose.Schema.Types.ObjectId,
           ref:"CarUser",
-          required:true
      }
 
 },{timestamps:true})
