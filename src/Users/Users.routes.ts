@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 
-import { register,login,logout } from "./Users.controllers";
+import { register,login,logout, getUsers } from "./Users.controllers";
 import { Request, Response, NextFunction } from "express";
 import { authMiddleware, AuthRequest } from "../middleware/auth.middleware";
 
@@ -19,6 +19,11 @@ userRouter.post(
   "/logout",
   authMiddleware as (req:Request, res:Response, next:NextFunction) => void,
   logout as (req: Request, res: Response, next: NextFunction) => void
+);
+userRouter.get(
+  "/getUsers",
+  authMiddleware as (req:Request, res:Response, next:NextFunction) => void,
+  getUsers as (req: Request, res: Response, next: NextFunction) => void
 );
 
 export default userRouter

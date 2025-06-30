@@ -106,3 +106,23 @@ export const logout = (req: Request, res: Response,next:NextFunction) => {
 //     });
   }
 };
+
+
+// Get All users
+
+export let getUsers = async(req:Request, res:Response, next:NextFunction) => {
+  try{
+    const allUsers = await UserModel.find();
+
+    res.status(200).json({
+      success:true,
+      data: allUsers
+    })
+  }
+  catch(err){
+    res.status(500).json({
+      success:false,
+      message: err instanceof Error ? err.message : "Unable to find users"
+    })
+  }
+}
