@@ -13,7 +13,7 @@ const carRouter = express.Router();
 carRouter.get("/", getAllCars);
 
 carRouter.post(
-  "/",
+  "/createCar",
   authMiddleware as (
     req: AuthRequest,
     res: Response,
@@ -23,7 +23,7 @@ carRouter.post(
 );
 
 carRouter.put(
-  "/:id",
+  "/updateCar/:id",
   authMiddleware as (
     req: AuthRequest,
     res: Response,
@@ -32,7 +32,7 @@ carRouter.put(
   updateCar as (req: Request, res: Response, next: NextFunction) => void
 );
 carRouter.delete(
-  "/:id",
+  "/deleteCar/:id",
   authMiddleware as (
     req: AuthRequest,
     res: Response,

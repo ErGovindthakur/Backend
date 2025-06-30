@@ -41,6 +41,11 @@ export const createCar = async(req:AuthRequest,res:Response) => {
                price,
                createdBy:req.user?._id
           })
+
+          res.status(201).json({
+               success:true,
+               message:"Car created successfully"
+          })
      }
      catch(err){
           res.status(500).json({
