@@ -6,7 +6,6 @@ import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
-import { subscribe } from "diagnostics_channel.js";
 import mongoose from "mongoose";
 
 // generating access and refresh token
@@ -237,11 +236,11 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
   user.password = newPassword;
 
-  await user.save({ validateBeforeSave: false });
+  const updatedUser = await user.save({ validateBeforeSave: false });
 
   return res
     .status(200)
-    .json(new ApiResponse(200, {}, "Password Changed successfully..."));
+    .json(new ApiResponse(200, {updatedUser}, "Password Changed successfully..."));
 });
 
 // 6. getCurrent User
