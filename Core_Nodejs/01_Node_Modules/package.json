@@ -1,0 +1,17 @@
+{
+  "name": "01_node_modules",
+  "version": "1.0.0",
+  "main": "01_UserdefinedModule.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node 04_System_Monitoring.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^5.6.2"
+  }
+}
