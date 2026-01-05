@@ -1,10 +1,11 @@
 // writing simple code using nodejs
 
-import process from "process";
+// import process from "process";
+// console.log(process)
 
-let hours = new Date().getHours();
+// let hours = new Date().getHours();
 
-let name = process.argv[2];
+// let name = process.argv[2];
 
 export const getGreeting = (hours) => {
      if(hours < 3 || hours > 19) return "Good Night!";
@@ -13,6 +14,6 @@ export const getGreeting = (hours) => {
      return "Good Evening!"
 }
 
-let greet = getGreeting(hours);
+// let greet = getGreeting(hours);
 
-console.log(`${greet},${name}`)
+// console.log(`${greet},${name}`)
