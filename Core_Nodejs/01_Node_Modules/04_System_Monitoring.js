@@ -1,5 +1,6 @@
 // Creating a system resource monitoring cli app using nodejs inbuilt "os" module
 
+import chalk from "chalk";
 import os from "node:os";
 
 // console.log(os.cpus())
@@ -21,6 +22,7 @@ function monitor() {
     });
 
     console.clear();
+    console.log(chalk.blue.bgRed.bold('******** System Stats ********'))
     console.table(usage);
 
     const usedMem = (os.totalmem() - os.freemem()) / (1024*1024*1024)
