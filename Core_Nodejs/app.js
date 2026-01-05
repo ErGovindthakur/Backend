@@ -1,5 +1,5 @@
 import process from "process";
-console.log(process.argv)
+// console.log(process.argv)
 
 /*
 since we are using here -:
@@ -21,3 +21,16 @@ console.log(process.argv)
 => 
 */
 // console.log(process.argv[2],process.argv[3])
+
+let n = process.argv[2];
+
+function printTriangle(){
+     for(let i = 1; i<=n; i++){
+          for(let j = 1; j<=i; j++){
+               process.stdout.write("* ")
+          }
+          console.log()
+     }
+}
+
+printTriangle()
