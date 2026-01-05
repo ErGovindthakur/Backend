@@ -22,11 +22,16 @@ function monitor() {
     });
 
     console.clear();
-    console.log(chalk.blue.bgRed.bold('******** System Stats ********'))
+    console.log(chalk.blue.bgRed.bold("******** System Stats ********"));
     console.table(usage);
 
-    const usedMem = (os.totalmem() - os.freemem()) / (1024*1024*1024)
-    console.log(`Used Memory -> ${usedMem.toFixed(1)}% / ${(os.totalmem()/(1024*1024*1024)).toFixed(1)}%`)
+    const usedMem = (os.totalmem() - os.freemem()) / (1024 * 1024 * 1024);
+    console.log(
+      `Used Memory -> ${usedMem.toFixed(1)}% / ${(
+        os.totalmem() /
+        (1024 * 1024 * 1024)
+      ).toFixed(1)}%`
+    );
   }, 1000);
 }
 
