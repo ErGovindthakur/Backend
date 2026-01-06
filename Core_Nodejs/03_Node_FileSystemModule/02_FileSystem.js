@@ -41,11 +41,15 @@ async function deleteFolder(folderPath){
 // 7. get file info
 
 async function getFileInfo(filePath){
-     const stats = await fs.stat(filePath)
-     return{
-          size:`${(stats.size/1024).toFixed(2)}KB`,
-          createAt:stats.birthtime.toLocaleString(),
-          modifiedAt:stats.mtime.toLocaleString()
+     try{
+          const stats = await fs.stat(filePath)
+          return{
+               size:`${(stats.size/1024).toFixed(2)}KB`,
+               createAt:stats.birthtime.toLocaleString(),
+               modifiedAt:stats.mtime.toLocaleString()
+          }
+     }catch(err){
+          console.log("File Info Error -> ",err)
      }
      // console.log(stats)
 }
@@ -54,7 +58,12 @@ async function getFileInfo(filePath){
 // readFile('./Hello.txt')
 // deleteFile('./Hello.txt')
 // deleteFolder("./contents")
-let fileInfo = getFileInfo("./Hello.txt");
-fileInfo.then((data)=>{console.log(data)})
-.catch(err=>console.log(err))
+try {
+     let fileInfo = await getFileInfo("./Hello.txt");
+     console.log(fileInfo)
+} catch (error) {
+     console.log("File Info Error -> ",err)
+}
+// fileInfo.then((data)=>{console.log(data)})
+// .catch(err=>console.log(err))
 
