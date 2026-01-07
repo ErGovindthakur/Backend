@@ -1,4 +1,5 @@
 // import * as fs from "node:fs";
+// import fs from "node:fs/promises"
 
 function createFile1(pathname) {
 
@@ -56,4 +57,23 @@ async function createFile2(pathname) {
      console.log("File Written");
 }
 
-createFile2("Hello.txt")
+// createFile2("Hello.txt")
+
+const listItems = async () => {
+  try {
+    const items = await fs.readdir(process.cwd(), { withFileTypes: true });
+
+    console.log(chalk.blue("\n📁 Current Directory Items:\n"));
+
+    items.forEach(item => {
+      if (item.isDirectory()) {
+        console.log(chalk.yellow("📂 " + item.name));
+      } else {
+        console.log(chalk.white("📄 " + item.name));
+      }
+    });
+  } catch (error) {
+    console.log(chalk.red("❌ Error listing items:"), error.message);
+  }
+};
+listItems();
