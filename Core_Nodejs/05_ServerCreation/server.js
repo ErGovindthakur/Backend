@@ -1,8 +1,11 @@
 import {createServer} from "node:http"
+import fs from "node:fs/promises"
+// console.log(await fs.readFile('./homePage.html'));
 
-const server = createServer((req,res)=>{
+
+const server = createServer(async(req,res)=>{
      console.log("Request Received... ")
-
+     // return
      // 1. sending a normal response form server
      // res.end("Hello from nodejs server");
 
@@ -14,17 +17,23 @@ const server = createServer((req,res)=>{
 
 
      // 3. Exploring the concept of routing in core nodejs
+     // 4. Sending static file (separate .html file)
      if(req.url === "/"){
           res.writeHead(200,{
                'content-type':'text/html'
           })
 
-          res.end('Hello from Home page')
+          // res.end('<h1>Hello from Home page</h1>')
+          const filePath = await fs.readFile("./homePage.html");
+          res.end(filePath)
      }else if(req.url === "/about"){
           res.writeHead(200,{
                'content-type':'text/html'
           })
-          res.end('Hello from About page')
+          // res.end('<h1>Hello from About page</h1>')
+          const filePath = await fs.readFile("./aboutPage.html");
+
+          res.end(filePath)
      }
 })
 
