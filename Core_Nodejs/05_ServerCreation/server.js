@@ -33,13 +33,15 @@ const server = createServer(async(req,res)=>{
 
           const dataStream = fs.ReadStream("./homePage.html");
 
-          dataStream.on('data',(chunk)=>{
-               res.write(chunk);
-          })
+          // dataStream.on('data',(chunk)=>{
+          //      res.write(chunk);
+          // })
+          // dataStream.on('end',()=>{
+          //      res.end()
+          // })
 
-          dataStream.on('end',()=>{
-               res.end()
-          })
+          // 6. Now just piping both "event => data, end" using pipe
+          dataStream.pipe(res)
      }else if(req.url === "/about"){
           res.writeHead(200,{
                'content-type':'text/html'
@@ -50,13 +52,14 @@ const server = createServer(async(req,res)=>{
 
           const dataStream = fs.createReadStream("./aboutPage.html");
 
-          dataStream.on('data',(chunk)=>{
-               res.write(chunk)
-          })
+          // dataStream.on('data',(chunk)=>{
+          //      res.write(chunk)
+          // })
+          // dataStream.on('end',()=>{
+          //      res.end();
+          // })
 
-          dataStream.on('end',()=>{
-               res.end();
-          })
+          dataStream.pipe(res)
      }
 })
 
