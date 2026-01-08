@@ -1,6 +1,7 @@
 import {createServer} from "node:http"
 // import fs from "node:fs/promises"
 import fs from "node:fs"
+import fsPromises from "node:fs/promises"
 
 // console.log(await fs.readFile('./homePage.html'));
 
@@ -60,6 +61,34 @@ const server = createServer(async(req,res)=>{
           // })
 
           dataStream.pipe(res)
+     }else if(req.url === "/expenses"){
+          // expense tracker
+          // create Apis
+          // Post
+
+          if(req.method === 'POST'){
+               // read data from request
+               let buff = '';
+               req.on('data',(chuck)=>{
+                    // console.log('chuck -> ',chuck)
+                    buff = buff + chuck.toString();
+               })
+               req.on('end',async()=>{
+                    const data = await fsPromises.readFile('./db.json')
+                    const dbData = JSON.parse(data)
+                    dbData.push(JSON.parse(buff));
+
+                    await fsPromises.writeFile('./db.json',JSON.stringify(dbData,null,2))
+                    
+                    res.end('OK')
+               })
+               // store it into json db
+          }else if(req.method === 'GET'){
+               // read data from json db
+               const dbData = await fsPromises.readFile('./db.json');
+               res.end(dbData)
+               // return to the client
+          }
      }
 })
 
