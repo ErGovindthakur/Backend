@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Event Streaming in Nodejs</title>
+</head>
+<body>
+     <h3>Exploring Event Streaming in Nodejs</h3>
+     <div id="container"></div>
+
+
+     <script>
+          const container = document.getElementById('container');
+
+          const eventSource = new EventSource('http://localhost:9000/stream');
+
+
+          eventSource.onopen = () => {
+               console.log("Connection Opened")
+          }
+
+          eventSource.onerror = (err) => {
+               console.log(`Error -> ${err}`)
+          }
+
+          eventSource.onmessage = (event) => {
+               console.log(`Message Received -> ${event.data}`)
+
+               const div = document.createElement('div');
+
+               div.textContent = event.data;
+
+               div.classList.add("event")
+
+               container.appendChild(div)
+          }
+     </script>
+</body>
+</html>
