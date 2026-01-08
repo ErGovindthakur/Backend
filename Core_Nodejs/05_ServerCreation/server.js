@@ -1,5 +1,7 @@
 import {createServer} from "node:http"
-import fs from "node:fs/promises"
+// import fs from "node:fs/promises"
+import fs from "node:fs"
+
 // console.log(await fs.readFile('./homePage.html'));
 
 
@@ -24,16 +26,37 @@ const server = createServer(async(req,res)=>{
           })
 
           // res.end('<h1>Hello from Home page</h1>')
-          const filePath = await fs.readFile("./homePage.html");
-          res.end(filePath)
+          // const filePath = await fs.readFile("./homePage.html");
+          // res.end(filePath)
+
+          // 5. Exploring file streaming in nodejs
+
+          const dataStream = fs.ReadStream("./homePage.html");
+
+          dataStream.on('data',(chunk)=>{
+               res.write(chunk);
+          })
+
+          dataStream.on('end',()=>{
+               res.end()
+          })
      }else if(req.url === "/about"){
           res.writeHead(200,{
                'content-type':'text/html'
           })
           // res.end('<h1>Hello from About page</h1>')
-          const filePath = await fs.readFile("./aboutPage.html");
+          // const filePath = await fs.readFile("./aboutPage.html");
+          // res.end(filePath)
 
-          res.end(filePath)
+          const dataStream = fs.createReadStream("./aboutPage.html");
+
+          dataStream.on('data',(chunk)=>{
+               res.write(chunk)
+          })
+
+          dataStream.on('end',()=>{
+               res.end();
+          })
      }
 })
 
